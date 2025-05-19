@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MHA Character Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+      padding: 40px;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      color: #00ffff;
+    }
+
+    .question {
+      margin: 20px auto;
+      max-width: 600px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 5px 0;
+    }
+
+    button {
+      padding: 12px 24px;
+      margin-top: 20px;
+      font-size: 18px;
+      background-color: #00aced;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #result-container {
+      margin-top: 40px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 1s ease;
+    }
+
+    #result-container.reveal {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #result {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ffde59;
+    }
+
+    .character-img {
+      width: 250px;
+      border-radius: 15px;
+      margin-top: 15px;
+      box-shadow: 0 0 20px #00ffff;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    /* Lightning animation background */
+    .lightning {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: rgba(255, 255, 255, 0);
+      animation: flash 5s infinite;
+    }
+
+    @keyframes flash {
+      0%, 100% { background: rgba(255, 255, 255, 0); }
+      10% { background: rgba(255, 255, 255, 0.2); }
+      11% { background: rgba(255, 255, 255, 0); }
+      15% { background: rgba(255, 255, 255, 0.4); }
+      16% { background: rgba(255, 255, 255, 0); }
+      50% { background: rgba(255, 255, 255, 0.1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lightning"></div>
+
+  <h1>Which My Hero Academia Character Are You?</h1>
+
+  <form id="quizForm">
+    <div class="question"><p>1. What motivates you most?</p>
+      <label><input type="radio" name="q1" value="midoriya"> Saving others</label>
+      <label><input type="radio" name="q1" value="bakugo"> Being the best</label>
+      <label><input type="radio" name="q1" value="uraraka"> Helping family</label>
+      <label><input type="radio" name="q1" value="todoroki"> Overcoming your past</label>
+    </div>
+
+    <div class="question"><p>2. Pick a favorite school subject:</p>
+      <label><input type="radio" name="q2" value="midoriya"> Science</label>
+      <label><input type="radio" name="q2" value="bakugo"> Gym</label>
+      <label><input type="radio" name="q2" value="uraraka"> Art</label>
+      <label><input type="radio" name="q2" value="todoroki"> History</label>
+    </div>
+
+    <div class="question"><p>3. What’s your fighting style?</p>
+      <label><input type="radio" name="q3" value="midoriya"> Strategic</label>
+      <label><input type="radio" name="q3" value="bakugo"> Aggressive</label>
+      <label><input type="radio" name="q3" value="uraraka"> Supportive</label>
+      <label><input type="radio" name="q3" value="todoroki"> Calm and powerful</label>
+    </div>
+
+    <div class="question"><p>4. Your biggest weakness is:</p>
+      <label><input type="radio" name="q4" value="midoriya"> Overthinking</label>
+      <label><input type="radio" name="q4" value="bakugo"> Anger</label>
+      <label><input type="radio" name="q4" value="uraraka"> Doubt</label>
+      <label><input type="radio" name="q4" value="todoroki"> Emotions</label>
+    </div>
+
+    <div class="question"><p>5. Pick a snack:</p>
+      <label><input type="radio" name="q5" value="midoriya"> Rice bowl</label>
+      <label><input type="radio" name="q5" value="bakugo"> Spicy chips</label>
+      <label><input type="radio" name="q5" value="uraraka"> Sweet buns</label>
+      <label><input type="radio" name="q5" value="todoroki"> Cold soba</label>
+    </div>
+
+    <div class="question"><p>6. What's your vibe?</p>
+      <label><input type="radio" name="q6" value="midoriya"> Nerdy hero</label>
+      <label><input type="radio" name="q6" value="bakugo"> Firecracker</label>
+      <label><input type="radio" name="q6" value="uraraka"> Bubbly</label>
+      <label><input type="radio" name="q6" value="todoroki"> Quiet but deep</label>
+    </div>
+
+    <div class="question"><p>7. What kind of music do you like?</p>
+      <label><input type="radio" name="q7" value="midoriya"> Uplifting</label>
+      <label><input type="radio" name="q7" value="bakugo"> Rock</label>
+      <label><input type="radio" name="q7" value="uraraka"> Pop</label>
+      <label><input type="radio" name="q7" value="todoroki"> Classical</label>
+    </div>
+
+    <div class="question"><p>8. What scares you most?</p>
+      <label><input type="radio" name="q8" value="midoriya"> Failing others</label>
+      <label><input type="radio" name="q8" value="bakugo"> Losing</label>
+      <label><input type="radio" name="q8" value="uraraka"> Being alone</label>
+      <label><input type="radio" name="q8" value="todoroki"> Becoming like your parents</label>
+    </div>
+
+    <div class="question"><p>9. Your best trait?</p>
+      <label><input type="radio" name="q9" value="midoriya"> Empathy</label>
+      <label><input type="radio" name="q9" value="bakugo"> Confidence</label>
+      <label><input type="radio" name="q9" value="uraraka"> Cheerfulness</label>
+      <label><input type="radio" name="q9" value="todoroki"> Balance</label>
+    </div>
+
+    <div class="question"><p>10. What's your motto?</p>
+      <label><input type="radio" name="q10" value="midoriya"> "I can do this!"</label>
+      <label><input type="radio" name="q10" value="bakugo"> "Out of my way!"</label>
+      <label><input type="radio" name="q10" value="uraraka"> "We rise together."</label>
+      <label><input type="radio" name="q10" value="todoroki"> "I control my own fate."</label>
+    </div>
+
+    <button type="button" onclick="showResult()">Get Your Hero!</button>
+  </form>
+
+  <div id="result-container">
+    <div id="result"></div>
+    <img id="characterImage" class="character-img" src="" alt="" style="display: none;">
+  </div>
+
+  <script>
+    function showResult() {
+      const questions = Array.from({ length: 10 }, (_, i) => `q${i + 1}`);
+      const scores = { midoriya: 0, bakugo: 0, uraraka: 0, todoroki: 0 };
+
+      questions.forEach(q => {
+        const selected = document.querySelector(`input[name=${q}]:checked`);
+        if (selected) scores[selected.value]++;
+      });
+
+      let topChar = "midoriya";
+      let max = 0;
+
+      for (const char in scores) {
+        if (scores[char] > max) {
+          max = scores[char];
+          topChar = char;
+        }
+      }
+
+      const names = {
+        midoriya: "Izuku Midoriya (Deku)",
+        bakugo: "Katsuki Bakugo",
+        uraraka: "Ochaco Uraraka",
+        todoroki: "Shoto Todoroki"
+      };
+
+      const images = {
+        midoriya: "https://i.imgur.com/hqz2FiO.png",
+        bakugo: "https://i.imgur.com/UygnUfl.png",
+        uraraka: "https://i.imgur.com/2ZD8Yeg.png",
+        todoroki: "https://i.imgur.com/dg2aQ30.png"
+      };
+
+      document.getElementById("result").innerText = `⚡ You are: ${names[topChar]}!`;
+      const img = document.getElementById("characterImage");
+      img.src = images[topChar];
+      img.style.display = "block";
+
+      document.getElementById("result-container").classList.add("reveal");
+    }
+  </script>
+</body>
+</html>
